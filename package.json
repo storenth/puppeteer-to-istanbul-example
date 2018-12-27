@@ -4,9 +4,9 @@
   "description": "example of using puppeteer-to-istanbul to output istanbul reports from puppeteer coverage",
   "main": "index.js",
   "scripts": {
-    "precoverage": "rimraf coverage && rimraf .nyc_output",
+    "precoverage": "rm -rf coverage && rm -rf .nyc_output",
     "coverage": "node index.js",
-    "postcoverage": "nyc report --reporter=html && open coverage/index.html",
+    "postcoverage": "nyc report --reporter=html",
     "test": "standard"
   },
   "keywords": [
