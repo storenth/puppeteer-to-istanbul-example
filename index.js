@@ -18,6 +18,17 @@ const pti = require('puppeteer-to-istanbul')
 
   // Disable JavaScript coverage
   const jsCoverage = await page.coverage.stopJSCoverage()
+  let totalBytes = 0;
+  let usedBytes = 0;
+  const coverage = [...jsCoverage];
+  for (const entry of coverage) {
+    totalBytes += entry.text.length;
+    console.log(`js fileName= ${entry.url}`);
+    for (const range of entry.ranges){
+      usedBytes += range.end - range.start - 1;
+    }
+  }
+  console.log(`Bytes used: ${usedBytes / totalBytes * 100}%`);
   pti.write(jsCoverage)
   await browser.close()
 })()
